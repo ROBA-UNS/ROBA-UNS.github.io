@@ -184,7 +184,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header .logo {
-  font-size: 32px;
+  font-size: 24px;
   margin: 0;
   padding: 0;
   line-height: 1;
@@ -233,7 +233,7 @@ h1, h2, h3, h4, h5, h6 {
 .nav-menu > ul > li {
   position: relative;
   white-space: nowrap;
-  padding: 18px 15px;
+  padding: 10px 15px;
   margin-left: 5px;
   transition: 0.3s;
 }
@@ -243,7 +243,7 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   color: #fff;
   transition: 0.3s;
-  font-size: 14px;
+  font-size: 12px;
   font-family: "Open Sans", sans-serif;
 }
 
@@ -260,7 +260,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0;
   visibility: hidden;
   padding: 10px 0;
-  background: #fff;
+  background: rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
   transition: 0.3s;
 }
@@ -272,13 +272,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-menu .drop-down li {
-  min-width: 180px;
+  min-width: 125px;
   position: relative;
 }
 
 .nav-menu .drop-down ul a {
   padding: 10px 20px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   text-transform: none;
   color: #191919;
@@ -306,7 +306,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-menu .drop-down .drop-down > a {
-  padding-right: 35px;
+  padding-right: 5px;
 }
 
 .nav-menu .drop-down .drop-down > a:after {
@@ -457,12 +457,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .container {
-  padding-top: 70px;
+  padding-top: 25px;
 }
 
 #hero h1 {
   margin: 0 0 10px 0;
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 700;
   line-height: 56px;
   text-transform: uppercase;
@@ -472,7 +472,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero h2 {
   color: #eee;
   margin-bottom: 30px;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 #hero .btn-get-started {
