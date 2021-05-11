@@ -7,12 +7,12 @@ function checkRobaIP()
 
     if(String(IP_ROBA) == "")
     {
-        alert("Input your ROBA IP Address")
+        alert("Input your ROBA IP Address");
     }
 
     if(String(IP_ROBA) != "")
     {
-        document.cookie = IP_ROBA;
+        document.cookie = "ip_roba="+IP_ROBA+";";
 
         if(String(IP_ROBA) == ip_pass)
         {
@@ -20,7 +20,7 @@ function checkRobaIP()
         }
         else
         {
-            alert("Check your ROBA IP Address")
+            alert("Check your ROBA IP Address");
         }
     }
     
