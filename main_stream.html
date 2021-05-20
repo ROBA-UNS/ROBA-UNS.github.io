@@ -80,15 +80,19 @@
     window.onload=function(){
       frame_name = document.getElementById('video');
 
-      frame_name.src="https://www.youtube.com/embed/NTrm_idbhUk";
-      //frame_name.src=videostream_url;
+      //frame_name.src="https://www.youtube.com/embed/NTrm_idbhUk";
+      frame_name.src=videostream_url;
     }
 
   </script>
 
+  <!-- MQTT -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+  
+
 </head>
 
-<body>
+<body id="keyControl" onkeydown="keydownFunction(event)" onkeyup="keyupFunction()">
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
@@ -137,42 +141,17 @@
                 </div>
             </div>
 
-            <!--Robot Sensor-->
+            <!--Robot Sensor ./assets/img/car.jpeg-->
             <div class="col">
                 <div class="card border-dark text-white special-card" align="center" style="height:402px">
                     <div class="card-body" style="padding:1px">
-                        <img src="./assets/img/car.jpeg" class="img-fluid" style="height:400px; width:auto;" />
+                        <img src="#" class="img-fluid" style="height:400px; width:auto;" />
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class ="row" align="center">
-        <p align="center">   </p>
 
-        </div>
-
-        <!--Bottom row-->
-        <div class="row">
-            <!--Map-->
-            <div class="col-8">
-                <div class="card border-dark text-white special-card" align="center" style="height:180px">
-                    <div class="card-body" style="padding:0px">
-                        <img src="./assets/img/map.png" class="img-fluid" style="height:180px; width:auto;"/>
-                    </div>
-                </div>
-            </div>
-
-            <!--NOTE-->
-            <div class="col">
-                <div class="card border-dark text-white special-card" align="center" style="height:180px">
-                    <div class="card-body" style="padding:0px">
-                    <p class="card-text">TEXT HERE</p>
-
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
   </section><!-- End Hero -->
@@ -192,7 +171,98 @@
 
   <!-- Template Main JS File -->
   <script src="./assets/js/main.js"></script>
-  <script src="./assets/js/main_stream.js"></script>
+
+  <!-- MQTT Configuration-->
+  <script src="./assets/js/mqtt_websockets.js"></script>
+  <script>
+    MQTTconnect();
+  </script>
+
+  <!-- Key Control -->
+  <script src="./assets/js/protocol.js"></script>
+
+  <script>
+
+    var kodeBelakang = belakangDiam();
+    var kodeDepan = depanDiam();
+    var kodeKamera = kameraDiam();
+
+    var prevKode;
+    var stringKode;
+    
+
+    function keydownFunction(event) {
+      // Detect the key pressed
+      var x = event.key;
+      
+      // Set control based on pressed key
+      if(x == "w" || x == "ArrowUp"){
+        kodeBelakang = belakangMaju();
+      }
+
+      if(x == "s" || x == "ArrowDown" ){
+        kodeBelakang = belakangMundur();
+      }
+
+      if(x == "d" || x == "ArrowRight"){
+        kodeDepan = depanKanan();
+      }
+
+      if(x == "a" || x == "ArrowLeft"){
+        kodeDepan = depanKiri();
+      }
+
+      if(x == "x"){
+        kodeBelakang = belakangDiam();
+      }
+
+      if(x == "o"){
+        kodeKamera = kameraKiri();
+      }
+
+      if(x == "p"){
+        kodeKamera = kameraKanan();
+      }
+
+      if(x == "1"){
+        kodeKamera = kameraTengah();
+      }
+
+      if(x == "0"){
+        kodeKamera = kameraDiam();
+      }
+
+      // Send via MQTT
+      sendMQTT();
+
+    }
+
+    function keyupFunction() {
+      // Variables contain default value
+      kodeBelakang = belakangDiam();
+      kodeDepan = depanDiam();
+      kodeKamera = kameraDiam();
+
+      // Send via MQTT
+      sendMQTT();
+
+    }
+
+    function sendMQTT(){
+      stringKode = command(kodeBelakang, kodeDepan, kodeKamera);
+
+      // Send if the code is different from previous
+      // Limit the transmission
+      if(stringKode != prevKode){
+        MQTTconnect();
+      }
+
+      prevKode = stringKode;
+
+      console.log(stringKode);
+    }
+
+  </script>
 
 
 
