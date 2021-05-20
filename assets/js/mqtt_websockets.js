@@ -1,7 +1,7 @@
 var mqtt;
 var reconnectTimeout = 60;
 var host = "192.168.43.35";
-var port = 9001;
+var port = 8443;
 
 function onConnect(){
   message = new Paho.MQTT.Message(stringKode);
